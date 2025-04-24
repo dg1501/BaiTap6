@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/ddc03bcc-d350-4257-a51d-d84a47be2ea9)# Bài tập 6: Hệ quản trị CSDL
+# Bài tập 6: Hệ quản trị CSDL
 ## Chủ đề: Câu lệnh Select
 ### Yêu cầu bài tập: 
 Cho file sv_tnut.sql (1.6MB)
@@ -88,3 +88,7 @@ AND (
 ![Untitled](https://github.com/user-attachments/assets/ffea5731-dee3-4b48-bdd0-b494ebec40d9)
 
 8. BẢNG SV CÓ HƠN 9000 ROWS, HÃY LIỆT KÊ TẤT CẢ CÁC SV NGÀNH KMT, SẮP XẾP THEO TÊN VÀ HỌ ĐỆM, KIỂU TIẾNG  VIỆT, GIẢI THÍCH?
+```
+```
+
+9. HÃY NHẬP SQL ĐỂ LIỆT KÊ CÁC SV NỮ NGÀNH KMT CÓ TRONG BẢNG SV (TRÌNH BÀY QUÁ TRÌNH SUY NGHĨ VÀ GIẢI NHỮNG VỨNG MẮC)
