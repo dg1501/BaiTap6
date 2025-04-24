@@ -1,4 +1,4 @@
-# Bài tập 6: Hệ quản trị CSDL
+![image](https://github.com/user-attachments/assets/ddc03bcc-d350-4257-a51d-d84a47be2ea9)# Bài tập 6: Hệ quản trị CSDL
 ## Chủ đề: Câu lệnh Select
 ### Yêu cầu bài tập: 
 Cho file sv_tnut.sql (1.6MB)
@@ -8,7 +8,7 @@ Cho file sv_tnut.sql (1.6MB)
 4. nhập sql để tìm xem có những sv nào trùng ngày và tháng sinh với em?
 5. nhập sql để tìm xem có những sv nào trùng tháng và năm sinh với em?
 6. nhập sql để tìm xem có những sv nào trùng tên với em?
-7. nhập sql để tìm xem có những sv nào trùng họ và tên đệm với em.
+7. nhập sql để tìm xem có những sv nào trùng họ và tên đệm với em?
 8. nhập sql để tìm xem có những sv nào có sđt sai khác chỉ 1 số so với sđt của em.
 9. BẢNG SV CÓ HƠN 9000 ROWS, HÃY LIỆT KÊ TẤT CẢ CÁC SV NGÀNH KMT, SẮP XẾP THEO TÊN VÀ HỌ ĐỆM, KIỂU TIẾNG  VIỆT, GIẢI THÍCH.
 10. HÃY NHẬP SQL ĐỂ LIỆT KÊ CÁC SV NỮ NGÀNH KMT CÓ TRONG BẢNG SV (TRÌNH BÀY QUÁ TRÌNH SUY NGHĨ VÀ GIẢI NHỮNG VỨNG MẮC)
@@ -32,17 +32,59 @@ Cho file sv_tnut.sql (1.6MB)
 
 ### THỰC HIỆN CÁC YÊU CẦU TỪ 2->9 
 1. Dữ liệu đầu vào là tên của sv; sđt; ngày, tháng, năm sinh của sinh viên (của sv đang làm bài tập này).
-- Tại cửa sổ New SQL, thêm đoạn code dưới và excute để tạo dữ liệu đầu vào.
 ```
-DECLARE @masv VARCHAR(20) = 'K225480106093';
-DECLARE @hodem NVARCHAR(50) = N'Nguyễn Đức';
-DECLARE @ten NVARCHAR(20) = N'Dương';
-DECLARE @ns DATE = '2004-01-15';
-DECLARE @lop NVARCHAR(50) = N'K58KMT.01';
-DECLARE @sdt VARCHAR(20) = '0396980922';
-
-INSERT INTO SV (masv, hodem, ten, ns, lop, sdt)
-VALUES (@masv, @hodem, @ten, @ns, @lop, @sdt);
+masv : K225480106093
+hodem: Nguyễn Đức
+ten  : Dương
+ns   : 2004-01-15
+sđt  : 0396980922
 ```
 
+2. Nhập SQL để tìm xem có những sv nào trùng hoàn toàn ngày/tháng/năm với em?
+```
+SELECT * FROM SV
+WHERE ns = '2004-01-15';
+```
+![Untitled](https://github.com/user-attachments/assets/2f55e06d-cc0b-4042-9b6e-4f538075d448)
 
+3. Nhập SQL để tìm xem có những sv nào trùng ngày và tháng sinh với em?
+```
+SELECT * FROM SV
+WHERE DAY(ns) = 15 AND MONTH(ns) = 01;
+```
+![image](https://github.com/user-attachments/assets/38e48f65-ad81-4723-9ac4-1f743c6b4281)
+
+4. Nhập SQL để tìm xem có những sv nào trùng tháng và năm sinh với em?
+```
+SELECT * FROM SV
+WHERE MONTH(ns) = 01 AND YEAR(ns) = 2004;
+```
+![image](https://github.com/user-attachments/assets/ff555cb7-b991-4a8c-bfb4-c53fe9471d74)
+
+5. Nhập SQL để tìm xem có những sv nào trùng tên với em?
+```
+SELECT * FROM SV
+WHERE ten = N'Dương';
+```
+![image](https://github.com/user-attachments/assets/d9271f2e-bf48-4ddf-94f5-ebe74d713243)
+
+6. Nhập SQL để tìm xem có những sv nào trùng họ và tên đệm với em?
+```
+SELECT * FROM SV
+WHERE hodem = N'Nguyễn Đức';
+```
+![Untitled](https://github.com/user-attachments/assets/f6351dd8-ef92-4a71-a79e-a48970a0ca0e)
+
+7. Nhập sql để tìm xem có những sv nào có sđt sai khác chỉ 1 số so với sđt của em?
+```
+SELECT * FROM SV
+WHERE LEN(sdt) = LEN('0396980922')
+AND (
+    SELECT COUNT(*) 
+    FROM (VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10)) AS T(n)
+    WHERE SUBSTRING(sdt, T.n, 1) <> SUBSTRING('0396980922', T.n, 1)
+) = 1;
+```
+![Untitled](https://github.com/user-attachments/assets/ffea5731-dee3-4b48-bdd0-b494ebec40d9)
+
+8. BẢNG SV CÓ HƠN 9000 ROWS, HÃY LIỆT KÊ TẤT CẢ CÁC SV NGÀNH KMT, SẮP XẾP THEO TÊN VÀ HỌ ĐỆM, KIỂU TIẾNG  VIỆT, GIẢI THÍCH?
